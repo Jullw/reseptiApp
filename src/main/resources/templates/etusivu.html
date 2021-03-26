@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+    <head>
+        <title>Etusivu</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+        <style>
+            html,
+            body {
+                height: 100%;
+                background: rgb(245,235,242);
+                background: radial-gradient(circle, rgba(245,235,242,1) 13%, rgba(241,177,205,1) 99%);
+                background-repeat: no-repeat; 
+                background-size:cover;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="d-flex justify-content-center align-items-center" style="height:300px; background-color: transparent;">  
+            <h1 style="color: darkgrey">Resepteja</h1>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center" style="height:50px; background-color: transparent;"> 
+
+            <div class="form-group"> 
+                <div style="background-color: transparent; text-align: center;" >
+                    <a href="/luoresepti"><button type="button" class="btn btn-light">Uusi resepti</button></a>
+                </div> 
+                <form th:action="@{/hae}"  method="POST">
+                    <div class="input-group input-group-lg">
+                        <input type="text" placeholder="Hae reseptejä" id="hae" th:value="${hae}" name="hae"/>
+                        <input type="submit" value="hae"/>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <div th:each="resepti: ${listaResepteista}">
+            <p th:text="${resepti.reseptinNimi}"/>
+            <p th:text="${resepti.annosKoko}"/>
+            <p th:text="${resepti.valmistusAika}"/>
+            <p th:text="${resepti.valmistusOhje}"/>
+            <p th:text="${resepti.vaikeusTaso}"/>
+            <p th:text="${resepti.aineOsat}"/>
+            <a th:href="@{/poista/{id}(id=${resepti.id})}">Poista</a>
+        </div>
+        <!-- <img th:src="data:image/jpg;base64,${resepti.kuva}"/> 
+        <p th:each="aineosa: ${resepti.aineOsat}"/>-->
+
+    </body>
+</html>

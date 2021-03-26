@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+    <head>
+        <title>Luoresepti</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
+
+        <style>
+
+        </style>
+    </head>
+    <!--form head th:object="${resepti}"  -->
+    <!--                                             <label>Kategoriat</label>
+                            <select id="kategoriaLista" th:field=*{kategoria}/>
+                            <option th:each="kategoria ${kategoriat}" 
+                                    th:value="${kategoria.id}" th:text="${kategoria.name}">	
+                            </option>
+                            </select> -->
+    <!-- th:field="*{ruokalaji}"  -->
+    <!--form head th:object="${resepti}"  -->
+
+    <body>
+        <div style="justify-content: center; align-content: center;">
+            <div> 
+                <form action="#" th:action="@{/luoresepti}" th:object="${resepti}" method="POST">
+
+                    <div style="flex-direction: column;"> 
+
+                        <label> Reseptin Nimi: </label><br></br>
+                        <input type="text" placeholder="Reseptin nimi" th:field="*{reseptinNimi}"/>
+
+                        <label>Ruokalaji</label>
+                        <select th:field="*{ruokalaji}">
+                            <option value="paaruoka"> Pääruoka </option>
+                            <option value="lisuke"> Lisuke </option>
+                            <option value="alkupala"> Alkupala </option>
+                            <option value="keitto"> Keitto </option>
+                            <option value="salaatti"> Salaatti </option>
+                            <option value="jalkiruoka"> Jälkiruoka </option>
+                            <option value="juoma"> Juoma </option>
+                        </select>
+
+                        <label>Ainekset</label>
+                        <input type="text" placeholder="Ainekset" th:field="*{aineOsat}"> </input>
+
+
+                    </div>
+
+                    <div style="flex-direction: column;">
+                        <label> Annoskoko: </label>
+                        <input type="number" placeholder="Annoksen koko" th:field="*{annosKoko}"/>
+                        <label>Valmistusaika minuutteina</label>
+                        <input type="number" placeholder="Valmistusaika" th:field="*{valmistusAika}"/>
+                        <label>Valmistusohje</label>
+                        <input type="text" placeholder="Valmistusohje" th:field="*{valmistusOhje}"/>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="helppo" th:field="*{vaikeusTaso}" value="helppo"/>
+                        
+                        <label for="helppo">Helppo</label>
+                        <input type="radio" id="keskivaikea" th:field="*{vaikeusTaso}" value="keskivaikea"/>
+                        <label for="keskivaikea">Keskivaikea</label>
+                        <input type="radio" id="vaikea" th:field="*{vaikeusTaso}" value="vaikea"/>
+                        <label for="vaikea">Vaikea</label>
+                    </div>
+
+                    <input type="submit" value="Luo Resepti"/>
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
