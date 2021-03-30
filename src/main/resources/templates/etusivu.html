@@ -48,9 +48,11 @@
                 <p> <b>Valmistusohje: </b> <span th:text="${resepti.valmistusOhje}"/> </p>
                 <p> <b>Aineosat: </b> <span th:text="${resepti.aineOsat}"/></p>
                 <p> <b>Vaikeustaso: </b> <span th:text="${resepti.vaikeusTaso}"/> </p>
-                <a th:href="@{/poista/{id}(id=${resepti.id})}"><b>Poista</b></a>
-                <a th:href="@{/poista/{id}(id=${resepti.id})}"><b>Muokkaa</b></a>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/poista/{id}(id=${resepti.id})}"><b>Poista</b></a>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/muokkaareseptia/{id}(id=${resepti.id})}"><b>Muokkaa</b></a>
+                
             </div>
+           <p th:inline="text">Login name: [[${#httpServletRequest.remoteUser}]]</p>
         </div>
 
     </body>
