@@ -5,15 +5,24 @@ import fi.reseptiAppi.resapp.domain.ReseptiRepository;
 import fi.reseptiAppi.resapp.web.LuoReseptiController;
 import fi.reseptiAppi.resapp.web.RestReseptiController;
 import fi.reseptiAppi.resapp.web.etusivuController;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
+@AutoConfigureMockMvc
 class ResappApplicationTests {
 
     @Autowired
@@ -23,7 +32,22 @@ class ResappApplicationTests {
     @Autowired
     private RestReseptiController restResepticontroller;
     @Autowired
-    private ReseptiRepository ree;
+    private ReseptiRepository ReseptiRepository;
+    @Autowired
+    private MockMvc mockMvc;
+
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.standaloneSetup(new etusivuController()).build();
+    }
+
+    @Test
+    public void testHomePage() throws Exception {
+        this.mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("etusivu"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+    }
 
     @Test
     void contextLoads() throws Exception {
@@ -36,10 +60,10 @@ class ResappApplicationTests {
     public void luoUusiResepti() {
         Resepti re = new Resepti();
 
-        ree.save(re);
+        re.setReseptinNimi("Puuro"); // muuten validointi error, koska ei saa olla null eikä alle kolme kirjainta;
+        re.setValmistusOhje("Keita vesi");
+        re.setRuokalaji("aamupala");
+        ReseptiRepository.save(re);
         assertThat(re.getId()).isNotNull();
     }
 }
-    /*assertThat(”Hello World”).contains(”Hello”)
-assertThat(objectToTest).isNotNull();
-assertThat(person.getName()).startsWith(”M”).endWith(”s”); */

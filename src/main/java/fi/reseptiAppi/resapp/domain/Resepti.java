@@ -46,9 +46,9 @@ public class Resepti extends AbstractPersistable<Long> {
 
     private String vaikeusTaso; //Selectilla thymessa */
 
-    private int tykkaykset;  // Laske näiden ratio Kontrollissa hae "SQL" lausekkaalla
-    private int epäTykkäykset;
-    private String kuvaOsoite;
+   // private int tykkaykset;  // Laske näiden ratio Kontrollissa hae "SQL" lausekkaalla
+   // private int epäTykkäykset;
+   // private String kuvaOsoite;
     
     
   /*  @Lob

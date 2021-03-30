@@ -19,7 +19,7 @@
 
     <body>
         <div class="d-flex justify-content-center align-items-center" style="height:300px; background-color: transparent;">  
-            <h1 style="color: darkgrey">Resepteja</h1>
+            <h1 style="color: darkgrey">Reseptejä</h1>
         </div>
 
         <div class="d-flex justify-content-center align-items-center" style="height:50px; background-color: transparent;"> 
@@ -39,19 +39,19 @@
         </div>
 
 
+       <div class="d-flex flex-column justify-content-center align-items-center" style=" margin-top: 30px; background-color: transparent;">  
 
-
-        <div th:each="resepti: ${listaResepteista}">
-            <p th:text="${resepti.reseptinNimi}"/>
-            <p th:text="${resepti.annosKoko}"/>
-            <p th:text="${resepti.valmistusAika}"/>
-            <p th:text="${resepti.valmistusOhje}"/>
-            <p th:text="${resepti.vaikeusTaso}"/>
-            <p th:text="${resepti.aineOsat}"/>
-            <a th:href="@{/poista/{id}(id=${resepti.id})}">Poista</a>
+            <div th:each="resepti: ${listaResepteista}">
+                <h4 th:text="${resepti.reseptinNimi}"/>
+                <p><b>AnnosKoko: </b><span th:text="${resepti.annosKoko}"/> </p>
+                <p> <b>Valmistusaika: </b> <span th:text="${resepti.valmistusAika}"/> </p>
+                <p> <b>Valmistusohje: </b> <span th:text="${resepti.valmistusOhje}"/> </p>
+                <p> <b>Aineosat: </b> <span th:text="${resepti.aineOsat}"/></p>
+                <p> <b>Vaikeustaso: </b> <span th:text="${resepti.vaikeusTaso}"/> </p>
+                <a th:href="@{/poista/{id}(id=${resepti.id})}"><b>Poista</b></a>
+                <a th:href="@{/poista/{id}(id=${resepti.id})}"><b>Muokkaa</b></a>
+            </div>
         </div>
-        <!-- <img th:src="data:image/jpg;base64,${resepti.kuva}"/> 
-        <p th:each="aineosa: ${resepti.aineOsat}"/>-->
 
     </body>
 </html>

@@ -7,30 +7,28 @@
         <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
 
         <style>
-
+            html,
+            body {
+                height: 100%;
+                background: rgb(245,235,242);
+                background: radial-gradient(circle, rgba(245,235,242,1) 13%, rgba(241,177,205,1) 99%);
+                background-repeat: no-repeat; 
+                background-size:cover;
+            }
         </style>
     </head>
-    <!--form head th:object="${resepti}"  -->
-    <!--                                             <label>Kategoriat</label>
-                            <select id="kategoriaLista" th:field=*{kategoria}/>
-                            <option th:each="kategoria ${kategoriat}" 
-                                    th:value="${kategoria.id}" th:text="${kategoria.name}">	
-                            </option>
-                            </select> -->
-    <!-- th:field="*{ruokalaji}"  -->
-    <!--form head th:object="${resepti}"  -->
 
     <body>
-        <div style="justify-content: center; align-content: center;">
+        <div class="d-flex justify-content-center align-items-center" style="height:600px; background-color: transparent;">  
             <div> 
                 <form action="#" th:action="@{/luoresepti}" th:object="${resepti}" method="POST">
 
                     <div style="flex-direction: column;"> 
-
-                        <label> Reseptin Nimi: </label><br></br>
+                        <h1 style="color: darkgrey">Reseptin luonti</h1>    
+                        </br><label> Reseptin Nimi: </label>
                         <input type="text" placeholder="Reseptin nimi" th:field="*{reseptinNimi}"/>
 
-                        <label>Ruokalaji</label>
+                        </br><label>Ruokalaji: </label>
                         <select th:field="*{ruokalaji}">
                             <option value="paaruoka"> Pääruoka </option>
                             <option value="lisuke"> Lisuke </option>
@@ -41,24 +39,24 @@
                             <option value="juoma"> Juoma </option>
                         </select>
 
-                        <label>Ainekset</label>
-                        <input type="text" placeholder="Ainekset" th:field="*{aineOsat}"> </input>
+                        </br><label>Ainekset: </label></br>
+                        <textarea  rows="4" cols="50" type="text" placeholder="Ainekset" th:field="*{aineOsat}"> </textarea>
 
 
                     </div>
 
                     <div style="flex-direction: column;">
-                        <label> Annoskoko: </label>
-                        <input type="number" placeholder="Annoksen koko" th:field="*{annosKoko}"/>
-                        <label>Valmistusaika minuutteina</label>
-                        <input type="number" placeholder="Valmistusaika" th:field="*{valmistusAika}"/>
-                        <label>Valmistusohje</label>
-                        <input type="text" placeholder="Valmistusohje" th:field="*{valmistusOhje}"/>
+                        </br><label> Annoskoko: </label>
+                        <input style="width: 4em" type="number" placeholder="Annoksen koko" th:field="*{annosKoko}"/>
+                        </br><label>Valmistusaika minuutteina: </label>
+                        <input style="width: 4em" type="number" placeholder="Valmistusaika" th:field="*{valmistusAika}"/>
+                        </br><label>Valmistusohje: </label></br>
+                        <textarea rows="4" cols="50" type="text" placeholder="Valmistusohje" th:field="*{valmistusOhje}"/>
                     </div>
 
                     <div>
                         <input type="radio" id="helppo" th:field="*{vaikeusTaso}" value="helppo"/>
-                        
+
                         <label for="helppo">Helppo</label>
                         <input type="radio" id="keskivaikea" th:field="*{vaikeusTaso}" value="keskivaikea"/>
                         <label for="keskivaikea">Keskivaikea</label>
@@ -67,7 +65,7 @@
                     </div>
 
                     <input type="submit" value="Luo Resepti"/>
-
+                    <a href="/etusivu"><button type="button" class="btn btn-dark">Etusivulle</button></a>  
                 </form>
             </div>
         </div>
