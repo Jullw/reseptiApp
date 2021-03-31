@@ -1,6 +1,5 @@
 package fi.reseptiAppi.resapp.web;
 
-
 import fi.reseptiAppi.resapp.domain.Resepti;
 import java.io.IOException;
 import org.springframework.stereotype.Controller;
@@ -30,25 +29,27 @@ public class LuoReseptiController {
 
     @GetMapping(value = {"/luoresepti"})
     public String etusivu(Model model) {
-        model.addAttribute("resepti",  new Resepti());
+        model.addAttribute("resepti", new Resepti());
         return "luoResepti";
     }
-
+   
+     /*************************************************************/
+    /* Validi ensimmaiseksi ja ModelAttribute sen jälkeen luin, että järjestyksellä on väliä!*/
     @PostMapping("/luoresepti")
-    public String submit(@Valid @ModelAttribute Resepti resepti, Model model, BindingResult tulos) {
+    public String luoresepti(@Valid @ModelAttribute() Resepti resepti, BindingResult tulos, Model model) {
         if (tulos.hasErrors()) {
             System.out.println("Virhe tapahtui");
             return "luoResepti";
+        } else {
+            model.addAttribute("resepti", resepti);
+            reseptiRepository.save(resepti);
+            return "redirect:/";
         }
-        
-        model.addAttribute("resepti", resepti);
-        reseptiRepository.save(resepti);
-
-        return "redirect:/";
     }
-
-
-
+    
+    /***************************************************************/
+    
+    
     /*  @PostMapping("/luoresepti")
     public String luoResepti(
             @RequestParam("reseptinnimi") String nimi,

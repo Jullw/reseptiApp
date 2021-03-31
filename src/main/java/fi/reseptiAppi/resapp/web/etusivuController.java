@@ -2,14 +2,12 @@ package fi.reseptiAppi.resapp.web;
 
 import fi.reseptiAppi.resapp.domain.Resepti;
 import fi.reseptiAppi.resapp.domain.ReseptiRepository;
-import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +28,11 @@ public class etusivuController {
         model.addAttribute("listaResepteista", reseptiRepository.findAll());
         return "etusivu";
     }
-
+    
+    /********************************************/
+    /*Unohtui esitellä hakuominaisuus findByReseptinNimiContainingIgnoreCase(hakunimi)
+    tämä muuttuu sql lauseeksi, joka hakee reseptit jos sisaltaa kirjainjonon esim: pa => nayttaa pastat  */
+    
     @PostMapping("/hae")
     public String hae(@RequestParam("hae") String hakunimi, Model model) {
         System.out.println(hakunimi);
@@ -44,7 +46,9 @@ public class etusivuController {
 
         return "etusivu";
     }
-
+    /********************************************/
+    
+    
     @GetMapping(value = "/poista/{ID}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String poistaResepti(@PathVariable("ID") Long reseptiID, Model model) {
@@ -52,18 +56,20 @@ public class etusivuController {
         return "redirect:../etusivu";
     }
 
-    @GetMapping("/muokkaareseptia/{ID}")
+    @GetMapping("/muokkaareseptia/{id}") 
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String muutaReseptia(@PathVariable("ID") Long ID, Model model) {
-        Resepti resepti = reseptiRepository.findById(ID).get();
-        model.addAttribute("resepti", resepti);
+    public String muutaReseptia(@PathVariable("id") Long ID, Model model) {
+        System.out.println(reseptiRepository.findById(ID));
+        Resepti re = reseptiRepository.findById(ID).get();
+        model.addAttribute("resepti", re);
         return "muokkaaResepti";
     }
-
-    @PostMapping("/tallennnaMuokattuResepti")
-    public String tallennnaMuokattuResepti(Resepti resepti) {
-        reseptiRepository.save(resepti);
+    
+   
+    @PostMapping("/tallenna")
+    public String tallennaMuokattuResepti(@ModelAttribute Resepti re) {
+        System.out.println(re);
+        reseptiRepository.save(re);
         return "redirect:etusivu";
     }
-
 }

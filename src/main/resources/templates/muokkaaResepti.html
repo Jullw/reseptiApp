@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
     <head>
-        <title>Luoresepti</title>
+        <title>Muokkaa Reseptiä</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"/>
@@ -23,10 +23,10 @@
     <body>
         <div class="d-flex justify-content-center align-items-center" style="height:600px; background-color: transparent;">  
             <div> 
-                <form action="#" th:action="@{../tallennnaMuokattuResepti}" th:object="${resepti}" method="POST">
+                <form th:action="@{../tallenna}" th:object="${resepti}" method="POST">
                     <input type="hidden" th:field="*{id}" class="form-control" /> 
                     <div style="flex-direction: column;"> 
-                        <h1 style="color: darkgrey">Reseptin luonti</h1>    
+                        <h1 style="color: darkgrey">Muokkaa Reseptiä</h1>    
                         </br><label> Reseptin Nimi: </label>
                         <input type="text" placeholder="Reseptin nimi" th:field="*{reseptinNimi}"/>
 
@@ -66,7 +66,7 @@
                         <label for="vaikea">Vaikea</label>
                     </div>
 
-                    <input type="submit" value="Talenna muutokset"/>
+                    <input type="submit" value="Tallenna muutokset"/>
                     <a href="/etusivu"><button type="button" class="btn btn-dark">Etusivulle</button></a>  
                 </form>
             </div>

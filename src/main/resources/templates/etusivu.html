@@ -42,8 +42,10 @@
        <div class="d-flex flex-column justify-content-center align-items-center" style=" margin-top: 30px; background-color: transparent;">  
 
             <div th:each="resepti: ${listaResepteista}">
+                <h4 th:text="${resepti.id}"/>
                 <h4 th:text="${resepti.reseptinNimi}"/>
                 <p><b>AnnosKoko: </b><span th:text="${resepti.annosKoko}"/> </p>
+                <p> <b>Ruokalaji: </b> <span th:text="${resepti.ruokalaji}"/> </p>
                 <p> <b>Valmistusaika: </b> <span th:text="${resepti.valmistusAika}"/> </p>
                 <p> <b>Valmistusohje: </b> <span th:text="${resepti.valmistusOhje}"/> </p>
                 <p> <b>Aineosat: </b> <span th:text="${resepti.aineOsat}"/></p>

@@ -14,9 +14,12 @@ public class ResappApplication {
 		SpringApplication.run(ResappApplication.class, args);
 	}
         @Bean
-	public CommandLineRunner bookDemo(AppUserRepository userRepository) {
+	public CommandLineRunner Resapp(AppUserRepository userRepository) {
 		return (args) -> {
-
+                        
+                    
+                        
+                    
 			// security: create new application users with the role info
 			// Create users: admin/admin user/user
 			AppUser user1 = new AppUser("user", "$2a$10$eBe.euY5ukBOCZY1g5psEuXC3hfOith5ksx41lWTn9l.Faq1xBQCu", "USER");
