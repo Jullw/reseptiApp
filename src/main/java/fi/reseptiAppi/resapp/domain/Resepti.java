@@ -20,7 +20,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Resepti{
     /**********************************/
-    /*ID:en autogenerointi abstractluokalla, loi aina uuden tietokanta objectin sen takia ei pystynyt muokkaamaan resepteja*/
+    
+    /*ID:en autogenerointi abstract rajapintaa, loi aina uuden tietokanta objectin sen takia ei pystynyt muokkaamaan resepteja*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
